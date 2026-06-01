@@ -32,7 +32,6 @@
     const menuData = [
       { name: "ブレンドコーヒー", category: "drink", price: 450 },
       { name: "カフェラテ", category: "drink", price: 500 },
-      { name: "抹茶フラペチーノ",category: "drink", price: 550 },
       { name: "たまごサンド", category: "food", price: 600 },
       { name: "チョコレートスコーン", category: "food", price: 350 }
     ];
