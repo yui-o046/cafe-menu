@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>シンプル・カフェメニュー</title>
+  <style>
+    /* 最低限の見た目だけ整えるCSS（パッと見て分かりやすいものだけ） */
+    body { font-family: sans-serif; padding: 20px; background-color: #fcf8f2; }
+    .filter-btn { margin-right: 10px; padding: 5px 10px; cursor: pointer; }
+    .menu-list { margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap; }
+    .menu-card { border: 1px solid #ccc; padding: 15px; background: white; border-radius: 5px; width: 200px; }
+    .price { color: #b85a00; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1>☕ マイ・カフェメニュー</h1>
+  <p>面接用につくったシンプルな絞り込み機能付きページです。</p>
+
+  <div>
+    <strong>カテゴリ選択：</strong>
+    <button class="filter-btn" onclick="filterMenu('all')">すべて</button>
+    <button class="filter-btn" onclick="filterMenu('drink')">ドリンク</button>
+    <button class="filter-btn" onclick="filterMenu('food')">フード</button>
+  </div>
+
+  <div id="menuContainer" class="menu-list">
+    </div>
+
+  <script>
+    // 1. メニューのデータ（配列）
+    const menuData = [
+      { name: "ブレンドコーヒー", category: "drink", price: 450 },
+      { name: "カフェラテ", category: "drink", price: 500 },
+      { neme: "抹茶フラペチーノ",category:"drink", price: 550 },
+      { name: "たまごサンド", category: "food", price: 600 },
+      { name: "チョコレートスコーン", category: "food", price: 350 }
+    ];
+
+    // 2. 画面にメニューを表示する関数（命令）
+    function displayMenu(items) {
+      const container = document.getElementById("menuContainer");
+      container.innerHTML = ""; // 一度画面を空っぽにする
+
+      // データの数だけループして、HTMLを作る
+      items.forEach(item => {
+        container.innerHTML += `
+          <div class="menu-card">
+            <h3>${item.name}</h3>
+            <p class="price">${item.price}円</p>
+          </div>
+        `;
+      });
+    }
+
+    // 3. ボタンが押された時に、データを絞り込む関数
+    function filterMenu(category) {
+      if (category === 'all') {
+        // 「すべて」なら全部表示
+        displayMenu(menuData);
+      } else {
+        // 選ばれたカテゴリだけをfilter（おなじみの配列操作）で抜き出す
+        const filtered = menuData.filter(item => item.category === category);
+        displayMenu(filtered);
+      }
+    }
+
+    // 4. ページを開いた時に、最初に全部表示しておく
+    displayMenu(menuData);
+  </script>
+
+</body>
+</html>
